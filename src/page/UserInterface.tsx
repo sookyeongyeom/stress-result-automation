@@ -1,33 +1,69 @@
 import styled from 'styled-components';
 import React from 'react';
+import * as XLSX from 'xlsx';
+import { useState } from 'react';
 
 interface Iprops {
-	onPrint: () => void;
+	onPrint: (arg: string) => void;
+}
+
+interface IExcelData {
+	[keys: string]: string | number;
 }
 
 function UserInterface({ onPrint }: Iprops) {
+	const [excelData, setExcelData] = useState('');
+	function readExcel(event: React.ChangeEvent<HTMLInputElement>) {
+		let input = event.currentTarget as HTMLInputElement;
+		let reader = new FileReader();
+
+		reader.onload = function () {
+			let data = reader.result;
+			let workBook = XLSX.read(data, { type: 'binary' });
+			workBook.SheetNames.forEach((sheetName) => {
+				console.log('SheetName: ' + sheetName);
+				let rows = XLSX.utils.sheet_to_json(workBook.Sheets[sheetName]);
+				console.log(JSON.stringify(rows));
+				setExcelData(JSON.stringify(rows));
+			});
+		};
+		if (input.files !== null) reader.readAsBinaryString(input.files[0]);
+	}
+
 	return (
 		<InterfaceWrapper>
 			<FileWrapper>
-				<input type='file' />
+				<input type='file' onChange={(e) => readExcel(e)} />
 			</FileWrapper>
 			<Table>
-				<tr>
-					<th>이름</th>
-					<th>성별</th>
-					<th>학교</th>
-					<th>실시기간</th>
-					<th>프린트</th>
-				</tr>
-				<tr>
-					<td>염파이</td>
-					<td>여</td>
-					<td>연세초등</td>
-					<td>뉸누냔나</td>
-					<td>
-						<button onClick={onPrint}>PRINT</button>
-					</td>
-				</tr>
+				<tbody>
+					<tr>
+						<th>이름</th>
+						<th>성별</th>
+						<th>학교</th>
+						<th>시작일</th>
+						<th>종료일</th>
+						<th>프린트</th>
+					</tr>
+					{excelData.length !== 0
+						? JSON.parse(excelData).map((v: IExcelData, i: number) => (
+								<tr key={i}>
+									<td>{v.name}</td>
+									<td>{v.gender}</td>
+									<td>{v.school}</td>
+									<td>{v.startDate}</td>
+									<td>{v.endDate}</td>
+									<td>
+										{excelData.length !== 0 ? (
+											<button onClick={() => onPrint(JSON.stringify(JSON.parse(excelData)[i]))}>
+												PRINT
+											</button>
+										) : null}
+									</td>
+								</tr>
+						  ))
+						: null}
+				</tbody>
 			</Table>
 		</InterfaceWrapper>
 	);

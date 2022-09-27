@@ -4,15 +4,17 @@ import Pin from '../asset/page3_pin.svg';
 import { useEffect, useRef } from 'react';
 import renderGuage from '../util/renderGauge';
 
-interface Props {
-	profileData: { name: string; gender: string; school: string; date: string };
-	exerciseReport: { day: number; size: number }[];
-	sleepReport: { day: number; size: number }[];
-	walkReport: { day: number; size: number }[];
+interface IProps {
+	parsedData: IParsedData;
+	pressReady: () => void;
 }
 
-function Page3({ profileData, exerciseReport, sleepReport, walkReport }: Props) {
-	const { gender } = profileData;
+interface IParsedData {
+	[keys: string]: string | number;
+}
+
+function Page3({ parsedData, pressReady }: IProps) {
+	const { gender } = parsedData;
 	const exerciseGauge = useRef() as React.MutableRefObject<HTMLImageElement>;
 	const exerciseState = useRef() as React.MutableRefObject<HTMLTableCellElement>;
 	const sleepGauge = useRef() as React.MutableRefObject<HTMLImageElement>;
@@ -21,10 +23,27 @@ function Page3({ profileData, exerciseReport, sleepReport, walkReport }: Props) 
 	const walkState = useRef() as React.MutableRefObject<HTMLTableCellElement>;
 
 	useEffect(() => {
-		renderGuage(exerciseReport, exerciseGauge, exerciseState, 'exercise');
-		renderGuage(sleepReport, sleepGauge, sleepState, 'sleep');
-		renderGuage(walkReport, walkGauge, walkState, 'walk', gender);
-	}, [exerciseReport, sleepReport, walkReport, gender]);
+		if (parsedData) {
+			const exerciseData = [];
+			const sleepData = [];
+			const walkData = [];
+
+			console.log(parsedData);
+
+			for (const key in parsedData) {
+				if (key.slice(0, 4) === 'exer') exerciseData.push(parsedData[key]);
+				if (key.slice(0, 4) === 'slee') sleepData.push(parsedData[key]);
+				if (key.slice(0, 4) === 'walk') walkData.push(parsedData[key]);
+			}
+
+			renderGuage(exerciseData as number[], exerciseGauge, exerciseState, 'exercise');
+			renderGuage(sleepData as number[], sleepGauge, sleepState, 'sleep');
+			renderGuage(walkData as number[], walkGauge, walkState, 'walk', gender as string);
+			console.log('page3 완료');
+			pressReady();
+		}
+	}, [parsedData]);
+
 	return (
 		<div className='page_container page3'>
 			{/* <!-- **************** 배경 **************** --> */}
@@ -36,108 +55,110 @@ function Page3({ profileData, exerciseReport, sleepReport, walkReport }: Props) 
 			<div id='content' className='page3_content'>
 				<h2>7일 종합 리포트</h2>
 				<table>
-					<tr>
-						<th>7일 평균</th>
-						<td id='chart_exercise'>
-							<div className='chart'>
-								<div className='chart_bar'></div>
-								<div className='chart_hidden'></div>
-							</div>
-							<div className='chart_pin'>
-								<img src={Pin} alt='눈금' ref={exerciseGauge} />
-							</div>
-						</td>
-						<td id='chart_sleep'>
-							<div className='chart'>
-								<div className='chart_bar'></div>
-								<div className='chart_hidden'></div>
-							</div>
-							<div className='chart_pin'>
-								<img src={Pin} alt='눈금' ref={sleepGauge} />
-							</div>
-						</td>
-						<td id='chart_walk'>
-							<div className='chart'>
-								<div className='chart_bar'></div>
-								<div className='chart_hidden'></div>
-							</div>
-							<div className='chart_pin'>
-								<img src={Pin} alt='눈금' ref={walkGauge} />
-							</div>
-							<div className='state'>
-								<div className='under'></div>
-								<div>미충족</div>
-								<div className='exact'></div>
-								<div>충족</div>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th></th>
-						<td>
-							중·고강도
-							<br />
-							신체활동시간
-						</td>
-						<td>수면시간</td>
-						<td>걸음 수</td>
-					</tr>
-					<tr>
-						<th>
-							충족
-							<br />
-							여부
-						</th>
-						<td id='state_exercise' ref={exerciseState}>
-							%충족/미충족%
-						</td>
-						<td id='state_sleep' ref={sleepState}>
-							%충족/미충족%
-						</td>
-						<td id='state_walk' ref={walkState}>
-							%충족/미충족%
-						</td>
-					</tr>
-					<tr>
-						<th>기준</th>
-						<td>
-							<p>
-								WHO 권장
+					<tbody>
+						<tr>
+							<th>7일 평균</th>
+							<td id='chart_exercise'>
+								<div className='chart'>
+									<div className='chart_bar'></div>
+									<div className='chart_hidden'></div>
+								</div>
+								<div className='chart_pin'>
+									<img src={Pin} alt='눈금' ref={exerciseGauge} />
+								</div>
+							</td>
+							<td id='chart_sleep'>
+								<div className='chart'>
+									<div className='chart_bar'></div>
+									<div className='chart_hidden'></div>
+								</div>
+								<div className='chart_pin'>
+									<img src={Pin} alt='눈금' ref={sleepGauge} />
+								</div>
+							</td>
+							<td id='chart_walk'>
+								<div className='chart'>
+									<div className='chart_bar'></div>
+									<div className='chart_hidden'></div>
+								</div>
+								<div className='chart_pin'>
+									<img src={Pin} alt='눈금' ref={walkGauge} />
+								</div>
+								<div className='state'>
+									<div className='under'></div>
+									<div>미충족</div>
+									<div className='exact'></div>
+									<div>충족</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>
+								중·고강도
 								<br />
-								중·고강도 신체활동시간:
+								신체활동시간
+							</td>
+							<td>수면시간</td>
+							<td>걸음 수</td>
+						</tr>
+						<tr>
+							<th>
+								충족
 								<br />
-								1일 평균 60분
-							</p>
-							<p>
-								2020 WHO
-								<br />
-								(Guidelines on physical activity)
-							</p>
-						</td>
-						<td>
-							<p>
-								미국 국립수면재단 권장 취학아동 (6-13세)
-								<br />
-								적정 수면시간: 9-11시간
-							</p>
-							<p>미국 국립수면재단 (National Sleep Foundation)</p>
-						</td>
-						<td>
-							<p>
-								미국 페닝턴
-								<br />
-								바이오메디컬
-								<br />
-								리서치센터 제시
-								<br />만 6-11세 걸음 기준:
-								<br />
-								남아 12,000걸음,
-								<br />
-								여아 10,000걸음
-							</p>
-							<p>Pennington Biomedical Research Center - Walking Behavior Laboratory</p>
-						</td>
-					</tr>
+								여부
+							</th>
+							<td id='state_exercise' ref={exerciseState}>
+								%충족/미충족%
+							</td>
+							<td id='state_sleep' ref={sleepState}>
+								%충족/미충족%
+							</td>
+							<td id='state_walk' ref={walkState}>
+								%충족/미충족%
+							</td>
+						</tr>
+						<tr>
+							<th>기준</th>
+							<td>
+								<p>
+									WHO 권장
+									<br />
+									중·고강도 신체활동시간:
+									<br />
+									1일 평균 60분
+								</p>
+								<p>
+									2020 WHO
+									<br />
+									(Guidelines on physical activity)
+								</p>
+							</td>
+							<td>
+								<p>
+									미국 국립수면재단 권장 취학아동 (6-13세)
+									<br />
+									적정 수면시간: 9-11시간
+								</p>
+								<p>미국 국립수면재단 (National Sleep Foundation)</p>
+							</td>
+							<td>
+								<p>
+									미국 페닝턴
+									<br />
+									바이오메디컬
+									<br />
+									리서치센터 제시
+									<br />만 6-11세 걸음 기준:
+									<br />
+									남아 12,000걸음,
+									<br />
+									여아 10,000걸음
+								</p>
+								<p>Pennington Biomedical Research Center - Walking Behavior Laboratory</p>
+							</td>
+						</tr>
+					</tbody>
 				</table>
 				<div className='report_caution'>
 					※

@@ -5,12 +5,16 @@ import Logo from '../asset/page1_로고.png';
 import GrayBG from '../asset/page1_회색배경.png';
 import Border from '../asset/page1_border.png';
 
-interface Props {
-	profileData: { name: string; gender: string; school: string; date: string };
+interface IProps {
+	parsedData: IParsedData;
 }
 
-export default function Page1({ profileData }: Props) {
-	const { name, gender, school, date } = profileData;
+interface IParsedData {
+	[keys: string]: string | number;
+}
+
+export default function Page1({ parsedData }: IProps) {
+	const { name, gender, school, startDate, endDate } = parsedData;
 	return (
 		<div className='page_container page1'>
 			{/* <!-- **************** 배경 **************** --> */}
@@ -32,22 +36,24 @@ export default function Page1({ profileData }: Props) {
 					</h1>
 				</div>
 				<table className='page1_profile absolute'>
-					<tr>
-						<th>이&emsp;&ensp;&nbsp;름</th>
-						<td id='profile_name'>{name}</td>
-					</tr>
-					<tr>
-						<th>학&emsp;&ensp;&nbsp;교</th>
-						<td id='profile_school'>{school}</td>
-					</tr>
-					<tr>
-						<th>성&emsp;&ensp;&nbsp;별</th>
-						<td id='profile_gender'>{gender}</td>
-					</tr>
-					<tr>
-						<th style={{ letterSpacing: '0.04rem', paddingLeft: '0.15rem' }}>실시기간</th>
-						<td id='profile_date'>{date}</td>
-					</tr>
+					<tbody>
+						<tr>
+							<th>이&emsp;&ensp;&nbsp;름</th>
+							<td id='profile_name'>{name}</td>
+						</tr>
+						<tr>
+							<th>학&emsp;&ensp;&nbsp;교</th>
+							<td id='profile_school'>{school}</td>
+						</tr>
+						<tr>
+							<th>성&emsp;&ensp;&nbsp;별</th>
+							<td id='profile_gender'>{gender}</td>
+						</tr>
+						<tr>
+							<th style={{ letterSpacing: '0.04rem', paddingLeft: '0.15rem' }}>실시기간</th>
+							<td id='profile_date'>{`${startDate}~${endDate}`}</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 		</div>

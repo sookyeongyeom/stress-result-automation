@@ -3,15 +3,16 @@ import GrayBottom from '../asset/page2_회색하단.png';
 import renderGraph from '../util/renderGraph';
 import { useEffect, useRef } from 'react';
 
-interface Props {
-	profileData: { name: string; gender: string; school: string; date: string };
-	exerciseReport: { day: number; size: number }[];
-	sleepReport: { day: number; size: number }[];
-	walkReport: { day: number; size: number }[];
+interface IProps {
+	parsedData: IParsedData;
 }
 
-export default function Page2({ profileData, exerciseReport, sleepReport, walkReport }: Props) {
-	const { name, gender, date } = profileData;
+interface IParsedData {
+	[keys: string]: string | number;
+}
+
+export default function Page2({ parsedData }: IProps) {
+	const { name, gender, startDate, endDate } = parsedData;
 	const exerciseY = useRef() as React.MutableRefObject<HTMLDivElement>;
 	const exerciseGraph = useRef() as React.MutableRefObject<HTMLDivElement>;
 	const sleepY = useRef() as React.MutableRefObject<HTMLDivElement>;
@@ -20,10 +21,25 @@ export default function Page2({ profileData, exerciseReport, sleepReport, walkRe
 	const walkGraph = useRef() as React.MutableRefObject<HTMLDivElement>;
 
 	useEffect(() => {
-		renderGraph(exerciseReport, exerciseY, exerciseGraph, false);
-		renderGraph(sleepReport, sleepY, sleepGraph, false);
-		renderGraph(walkReport, walkY, walkGraph, true);
-	}, [exerciseReport, sleepReport, walkReport]);
+		if (parsedData) {
+			const exerciseData = [];
+			const sleepData = [];
+			const walkData = [];
+
+			console.log(parsedData);
+
+			for (const key in parsedData) {
+				if (key.slice(0, 4) === 'exer') exerciseData.push(parsedData[key]);
+				if (key.slice(0, 4) === 'slee') sleepData.push(parsedData[key]);
+				if (key.slice(0, 4) === 'walk') walkData.push(parsedData[key]);
+			}
+
+			renderGraph(exerciseData as number[], exerciseY, exerciseGraph, false);
+			renderGraph(sleepData as number[], sleepY, sleepGraph, false);
+			renderGraph(walkData as number[], walkY, walkGraph, true);
+			console.log('page2 완료');
+		}
+	}, [parsedData]);
 
 	return (
 		<div className='page_container page2'>
@@ -41,7 +57,7 @@ export default function Page2({ profileData, exerciseReport, sleepReport, walkRe
 						<th>성별</th>
 						<td id='profile_gender'>{gender}</td>
 						<th>실시기간</th>
-						<td id='profile_date'>{date}</td>
+						<td id='profile_date'>{`${startDate}~${endDate}`}</td>
 					</tr>
 				</table>
 				{/* <!-- **************** 신체활동시간 리포트 **************** --> */}
