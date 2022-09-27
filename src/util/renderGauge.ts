@@ -1,22 +1,17 @@
 import { MutableRefObject } from 'react';
 
-type ReportData = {
-	day: number;
-	size: number;
-};
-
 type Standard = {
 	[key: string]: any;
 };
 
 export default function renderGuage(
-	reportData: ReportData[],
+	reportData: number[],
 	targetGauge: MutableRefObject<HTMLImageElement>,
 	targetState: MutableRefObject<HTMLTableDataCellElement>,
 	reportType: string,
 	gender?: string,
 ) {
-	const total = reportData.reduce((acc, cur, idx) => (acc += cur.size), 0);
+	const total = reportData.reduce((acc, cur, idx) => (acc += cur), 0);
 	const average = total / reportData.length;
 
 	let state: string = '';
