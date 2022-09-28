@@ -11,11 +11,11 @@ function App() {
 		setIsReady(false);
 		setExcelData(excelData);
 	}
-	function printThis() {
-		window.print();
-	}
 	function pressReady() {
 		setIsReady(true);
+	}
+	function printThis() {
+		window.print();
 	}
 	useEffect(() => {
 		console.log(isReady);

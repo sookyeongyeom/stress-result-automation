@@ -16,12 +16,7 @@ interface IProps {
 function Report({ excelData, pressReady }: IProps) {
 	const [parsedData, setParsedData] = useState<IParsedData>();
 	useEffect(() => {
-		if (excelData.length !== 0 && typeof excelData === 'string')
-			setParsedData(JSON.parse(excelData));
-	}, [excelData]);
-
-	useEffect(() => {
-		if (excelData.length !== 0) console.log(`재변환! : ${excelData}`);
+		if (excelData.length !== 0) setParsedData(JSON.parse(excelData));
 	}, [excelData]);
 
 	return (
