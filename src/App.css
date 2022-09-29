@@ -94,7 +94,7 @@ body {
 }
 /* *************************** Page2 ************************** */
 .page2 {
-	padding: 3.9rem 0;
+	padding: 4rem 0;
 	padding-bottom: 2rem;
 }
 .page2_navy_bg {
@@ -112,7 +112,7 @@ body {
 }
 #graph {
 	width: 100%;
-	min-height: 65mm;
+	height: 65mm;
 	border: 1px solid #ddd;
 	display: flex;
 	flex-direction: column;
@@ -180,7 +180,7 @@ body {
 }
 .graph_caption {
 	background-color: rgb(212, 223, 252);
-	padding: 3.5mm 10mm;
+	padding: 3.1mm 10mm;
 	line-height: 6mm;
 	font-size: 10pt;
 	color: rgb(63, 63, 63);
