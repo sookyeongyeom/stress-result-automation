@@ -9,15 +9,19 @@ export default function renderGuage(
 	targetGauge: MutableRefObject<HTMLImageElement>,
 	targetState: MutableRefObject<HTMLTableDataCellElement>,
 	reportType: string,
+	isSleepReport: boolean,
 	gender?: string,
 ) {
-	const total = reportData.reduce((acc, cur, idx) => (acc += cur), 0);
+	// 모든 데이터를 숫자로 변환
+	reportData = reportData.map((v) => Number(v));
+	let total = reportData.reduce((acc, cur) => (acc += cur), 0);
+	if (isSleepReport) total /= 60;
 	const average = total / reportData.length;
 
 	let state: string = '';
 
 	if (reportType === 'exercise') {
-		if (average >= 1) state = 'exact';
+		if (average >= 60) state = 'exact';
 		else state = 'less';
 	}
 	if (reportType === 'sleep') {
@@ -26,17 +30,17 @@ export default function renderGuage(
 	}
 	if (reportType === 'walk') {
 		// 성별에 따라 기준 상이
-		if (gender === '남아')
+		if (gender === '남')
 			if (average >= 12000) state = 'exact';
 			else state = 'less';
-		if (gender === '여아')
+		if (gender === '여')
 			if (average >= 10000) state = 'exact';
 			else state = 'less';
 	}
 
 	// 게이지 렌더링
 	const max: Standard = {
-		exercise: 2,
+		exercise: 120,
 		sleep: 18,
 		walk: {
 			남아: 24000,

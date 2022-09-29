@@ -36,12 +36,13 @@ function Page3({ parsedData, pressReady }: IProps) {
 				if (key.slice(0, 4) === 'walk') walkData.push(parsedData[key]);
 			}
 
-			renderGuage(exerciseData as number[], exerciseGauge, exerciseState, 'exercise');
-			renderGuage(sleepData as number[], sleepGauge, sleepState, 'sleep');
-			renderGuage(walkData as number[], walkGauge, walkState, 'walk', gender as string);
+			renderGuage(exerciseData as number[], exerciseGauge, exerciseState, 'exercise', false);
+			renderGuage(sleepData as number[], sleepGauge, sleepState, 'sleep', true);
+			renderGuage(walkData as number[], walkGauge, walkState, 'walk', false, gender as string);
 			console.log('page3 완료');
 			pressReady();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [parsedData]);
 
 	return (
