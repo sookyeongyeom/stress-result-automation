@@ -50,7 +50,7 @@ export default function Page1({ parsedData }: IProps) {
 							<td id='profile_gender'>{gender}</td>
 						</tr>
 						<tr>
-							<th style={{ letterSpacing: '0.05rem', paddingLeft: '0.175rem' }}>실시기간</th>
+							<th style={{ letterSpacing: '0.03rem', paddingLeft: '0.2rem' }}>실시기간</th>
 							<td id='profile_date'>{`${startDate} ~ ${endDate}`}</td>
 						</tr>
 					</tbody>
