@@ -6,11 +6,16 @@ export default function renderGraph(
 	targetGraph: MutableRefObject<HTMLDivElement>,
 	isWalkReport: boolean,
 ) {
+	// 모든 데이터를 숫자로 변환
+	reportData = reportData.map((v) => Number(v));
+	// 신체활동시간 및 수면시간은 분->시간
+	if (!isWalkReport) reportData = reportData.map((v) => Number((v / 60).toFixed(2)));
+	console.log(reportData);
 	// 제일 긴 시간 찾기
 	let deepCopy = [...reportData];
 	deepCopy.sort((a: number, b: number) => b - a);
 	// 올림
-	let largest = Math.ceil(deepCopy[0]);
+	let largest = deepCopy[0] > 0 ? Math.ceil(deepCopy[0]) : 1;
 	// 일일 걸음 수 리포트는 5000 단위로 계산
 	if (isWalkReport) largest = Math.ceil(largest / 5000) * 5000;
 
