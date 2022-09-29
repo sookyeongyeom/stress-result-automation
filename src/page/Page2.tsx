@@ -57,7 +57,7 @@ export default function Page2({ parsedData }: IProps) {
 						<th>성별</th>
 						<td id='profile_gender'>{gender}</td>
 						<th>실시기간</th>
-						<td id='profile_date'>{`${startDate}~${endDate}`}</td>
+						<td id='profile_date'>{`${startDate} ~ ${endDate}`}</td>
 					</tr>
 				</table>
 				{/* <!-- **************** 신체활동시간 리포트 **************** --> */}
@@ -65,7 +65,7 @@ export default function Page2({ parsedData }: IProps) {
 					• <span className='underline bold500'>중·고강도 신체활동 시간이란,</span> 하루 중 밤
 					시간의 수면시간을 제외한 '상당히 활동적인 시간'과
 					<br />
-					&ensp;'매우 활동적인 시간'을 모두 합한 시간입니다.
+					&emsp;'매우 활동적인 시간'을 모두 합한 시간입니다.
 				</div>
 				<div id='graph' className='graph_exercise'>
 					<div id='graph_header'>일일 중·고강도 신체활동시간 리포트</div>
