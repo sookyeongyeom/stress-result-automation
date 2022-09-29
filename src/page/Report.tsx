@@ -1,7 +1,6 @@
 import Page1 from './Page1';
 import Page2 from './Page2';
 import Page3 from './Page3';
-import Page4 from './Page4';
 import { useEffect, useState } from 'react';
 
 interface IParsedData {
@@ -26,7 +25,7 @@ function Report({ excelData, pressReady }: IProps) {
 					<Page1 parsedData={parsedData} />
 					<Page2 parsedData={parsedData} />
 					<Page3 parsedData={parsedData} pressReady={pressReady} />
-					<Page4 />
+					{/* <Page4 /> */}
 				</>
 			) : null}
 		</>
