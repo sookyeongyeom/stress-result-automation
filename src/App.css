@@ -75,7 +75,6 @@ body {
 	font-size: 28pt;
 	padding-left: 7mm;
 	line-height: 3.8rem;
-	/* border-left: 8px solid #ffffff; */
 }
 .page1_profile {
 	right: -1mm;
@@ -95,7 +94,7 @@ body {
 }
 /* *************************** Page2 ************************** */
 .page2 {
-	padding: 3.85rem 0;
+	padding: 3.9rem 0;
 	padding-bottom: 2rem;
 }
 .page2_navy_bg {
@@ -117,7 +116,7 @@ body {
 	border: 1px solid #ddd;
 	display: flex;
 	flex-direction: column;
-	margin: 2.5mm 0;
+	margin: 3mm 0;
 }
 #graph_header {
 	text-align: center;
@@ -181,7 +180,7 @@ body {
 }
 .graph_caption {
 	background-color: rgb(212, 223, 252);
-	padding: 3mm 10mm;
+	padding: 3.5mm 10mm;
 	line-height: 6mm;
 	font-size: 10pt;
 	color: rgb(63, 63, 63);
@@ -193,7 +192,7 @@ body {
 	border-left: 0;
 	border-right: 0;
 	width: 100%;
-	margin-bottom: 2.5mm;
+	margin-bottom: 3mm;
 	font-size: 11pt;
 }
 .page2 th,
@@ -265,7 +264,6 @@ body {
 	transform: translate(-50%, 5%);
 }
 .chart_pin img {
-	/* width: 2.5rem; */
 	width: 3rem;
 	transform-origin: center 33px;
 }
@@ -279,7 +277,7 @@ body {
 	padding: 5mm;
 	letter-spacing: 0.05rem;
 	line-height: 1.6rem;
-	margin-top: 10.5mm;
+	margin-top: 14.5mm;
 }
 .page3 table {
 	border-collapse: collapse;
@@ -382,9 +380,6 @@ body {
 	margin-top: 0.7rem;
 	margin-bottom: 2rem;
 }
-button {
-	/* display: none; */
-}
 /* *************************** Media ************************** */
 @page {
 	size: A4;
@@ -398,6 +393,7 @@ button {
 	}
 	.page_container {
 		margin: 0;
+		box-shadow: none;
 		/* 프린트 시 페이지 분리 */
 		page-break-after: always;
 		/* 프린트 시 백그라운드 색상 적용 */
