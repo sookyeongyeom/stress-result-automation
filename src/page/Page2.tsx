@@ -44,14 +44,16 @@ export default function Page2({ parsedData }: PagePropsType) {
 			{/* <!-- **************** 내용 **************** --> */}
 			<div id='content' className='page2_content'>
 				<table>
-					<tr>
-						<th>이름</th>
-						<td id='profile_name'>{name}</td>
-						<th>성별</th>
-						<td id='profile_gender'>{gender}</td>
-						<th>실시기간</th>
-						<td id='profile_date'>{`${startDate} ~ ${endDate}`}</td>
-					</tr>
+					<tbody>
+						<tr>
+							<th>이름</th>
+							<td id='profile_name'>{name}</td>
+							<th>성별</th>
+							<td id='profile_gender'>{gender}</td>
+							<th>실시기간</th>
+							<td id='profile_date'>{`${startDate} ~ ${endDate}`}</td>
+						</tr>
+					</tbody>
 				</table>
 				{/* <!-- **************** 신체활동시간 리포트 **************** --> */}
 				<div className='graph_caption'>
