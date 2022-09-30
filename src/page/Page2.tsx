@@ -2,16 +2,9 @@ import NavyTop from '../asset/page2_남색상단.png';
 import GrayBottom from '../asset/page2_회색하단.png';
 import renderGraph from '../util/renderGraph';
 import { useEffect, useRef } from 'react';
+import PagePropsType from '../model/PagePropsType';
 
-interface IProps {
-	parsedData: IParsedData;
-}
-
-interface IParsedData {
-	[keys: string]: string | number;
-}
-
-export default function Page2({ parsedData }: IProps) {
+export default function Page2({ parsedData }: PagePropsType) {
 	const { name, gender, startDate, endDate } = parsedData;
 	const exerciseY = useRef() as React.MutableRefObject<HTMLDivElement>;
 	const exerciseGraph = useRef() as React.MutableRefObject<HTMLDivElement>;

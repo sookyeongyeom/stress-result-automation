@@ -3,17 +3,9 @@ import GrayBottom from '../asset/page2_회색하단.png';
 import Pin from '../asset/page3_pin.svg';
 import { useEffect, useRef } from 'react';
 import renderGuage from '../util/renderGauge';
+import { Page3PropsType } from '../model/PagePropsType';
 
-interface IProps {
-	parsedData: IParsedData;
-	pressReady: () => void;
-}
-
-interface IParsedData {
-	[keys: string]: string | number;
-}
-
-function Page3({ parsedData, pressReady }: IProps) {
+function Page3({ parsedData, pressReady }: Page3PropsType) {
 	const { gender } = parsedData;
 	const exerciseAverage = useRef() as React.MutableRefObject<HTMLTableCellElement>;
 	const exerciseGauge = useRef() as React.MutableRefObject<HTMLImageElement>;

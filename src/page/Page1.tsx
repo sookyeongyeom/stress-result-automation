@@ -4,16 +4,9 @@ import NavyBottom from '../asset/page1_남색하단.png';
 import Logo from '../asset/page1_로고.png';
 import GrayBG from '../asset/page1_회색배경.png';
 import Border from '../asset/page1_border.png';
+import PagePropsType from '../model/PagePropsType';
 
-interface IProps {
-	parsedData: IParsedData;
-}
-
-interface IParsedData {
-	[keys: string]: string | number;
-}
-
-export default function Page1({ parsedData }: IProps) {
+export default function Page1({ parsedData }: PagePropsType) {
 	const { name, gender, school, startDate, endDate } = parsedData;
 	return (
 		<div className='page_container page1'>

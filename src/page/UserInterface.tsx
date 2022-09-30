@@ -2,16 +2,10 @@ import styled from 'styled-components';
 import React from 'react';
 import * as XLSX from 'xlsx';
 import { useState } from 'react';
+import UserInterfacePropsType from '../model/UserInterfacePropsType';
+import RawExcelData from '../model/RawExcelData';
 
-interface Iprops {
-	onPrint: (arg: string) => void;
-}
-
-interface IExcelData {
-	[keys: string]: string | number;
-}
-
-function UserInterface({ onPrint }: Iprops) {
+function UserInterface({ onPrint }: UserInterfacePropsType) {
 	const [excelData, setExcelData] = useState('');
 	function readExcel(event: React.ChangeEvent<HTMLInputElement>) {
 		let input = event.currentTarget as HTMLInputElement;
@@ -46,7 +40,7 @@ function UserInterface({ onPrint }: Iprops) {
 						<th>프린트</th>
 					</tr>
 					{excelData.length !== 0
-						? JSON.parse(excelData).map((v: IExcelData, i: number) => (
+						? JSON.parse(excelData).map((v: RawExcelData, i: number) => (
 								<tr key={i}>
 									<td>{v.name}</td>
 									<td>{v.gender}</td>
