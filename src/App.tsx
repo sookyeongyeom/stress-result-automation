@@ -16,6 +16,7 @@ function App() {
 	}
 	function printThis() {
 		window.print();
+		setExcelData('');
 	}
 	useEffect(() => {
 		console.log(isReady);
