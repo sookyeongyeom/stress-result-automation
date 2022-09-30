@@ -43,8 +43,8 @@ export default function renderGuage(
 		exercise: 120,
 		sleep: 18,
 		walk: {
-			남아: 24000,
-			여아: 20000,
+			남: 24000,
+			여: 20000,
 		},
 	};
 	let deg;
