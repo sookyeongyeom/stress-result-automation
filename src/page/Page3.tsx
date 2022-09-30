@@ -15,10 +15,13 @@ interface IParsedData {
 
 function Page3({ parsedData, pressReady }: IProps) {
 	const { gender } = parsedData;
+	const exerciseAverage = useRef() as React.MutableRefObject<HTMLTableCellElement>;
 	const exerciseGauge = useRef() as React.MutableRefObject<HTMLImageElement>;
 	const exerciseState = useRef() as React.MutableRefObject<HTMLTableCellElement>;
+	const sleepAverage = useRef() as React.MutableRefObject<HTMLTableCellElement>;
 	const sleepGauge = useRef() as React.MutableRefObject<HTMLImageElement>;
 	const sleepState = useRef() as React.MutableRefObject<HTMLTableCellElement>;
+	const walkAverage = useRef() as React.MutableRefObject<HTMLTableCellElement>;
 	const walkGauge = useRef() as React.MutableRefObject<HTMLImageElement>;
 	const walkState = useRef() as React.MutableRefObject<HTMLTableCellElement>;
 
@@ -36,9 +39,12 @@ function Page3({ parsedData, pressReady }: IProps) {
 				if (key.slice(0, 4) === 'walk') walkData.push(parsedData[key]);
 			}
 
-			renderGuage(exerciseData as number[], exerciseGauge, exerciseState, 'exercise', false);
-			renderGuage(sleepData as number[], sleepGauge, sleepState, 'sleep', true);
-			renderGuage(walkData as number[], walkGauge, walkState, 'walk', false, gender as string);
+			// prettier-ignore
+			renderGuage(exerciseData as number[], exerciseAverage, exerciseGauge, exerciseState, 'exercise', false);
+			// prettier-ignore
+			renderGuage(sleepData as number[], sleepAverage, sleepGauge, sleepState, 'sleep', true);
+			// prettier-ignore
+			renderGuage(walkData as number[], walkAverage, walkGauge, walkState, 'walk', false, gender as string);
 			console.log('page3 완료');
 			pressReady();
 		}
@@ -102,6 +108,22 @@ function Page3({ parsedData, pressReady }: IProps) {
 							</td>
 							<td>수면시간</td>
 							<td>걸음 수</td>
+						</tr>
+						<tr>
+							<th>
+								7일
+								<br />
+								평균
+							</th>
+							<td id='state_exercise' ref={exerciseAverage}>
+								%7일 평균시간%
+							</td>
+							<td id='state_sleep' ref={sleepAverage}>
+								%7일 평균시간%
+							</td>
+							<td id='state_walk' ref={walkAverage}>
+								%7일 평균시간%
+							</td>
 						</tr>
 						<tr>
 							<th>

@@ -1,13 +1,22 @@
 import { MutableRefObject } from 'react';
 
+type Unit = {
+	[key: string]: string;
+};
+
+type Digit = {
+	[key: string]: number;
+};
+
 type Standard = {
 	[key: string]: any;
 };
 
 export default function renderGuage(
 	reportData: number[],
+	targetAverage: MutableRefObject<HTMLTableCellElement>,
 	targetGauge: MutableRefObject<HTMLImageElement>,
-	targetState: MutableRefObject<HTMLTableDataCellElement>,
+	targetState: MutableRefObject<HTMLTableCellElement>,
 	reportType: string,
 	isSleepReport: boolean,
 	gender?: string,
@@ -17,6 +26,19 @@ export default function renderGuage(
 	let total = reportData.reduce((acc, cur) => (acc += cur), 0);
 	if (isSleepReport) total /= 60;
 	const average = total / reportData.length;
+
+	// 7일 평균 렌더링
+	const unit: Unit = {
+		exercise: '분',
+		sleep: '시간',
+		walk: '걸음',
+	};
+	const digit: Digit = {
+		exercise: 0,
+		sleep: 1,
+		walk: 0,
+	};
+	targetAverage.current.innerHTML = `${average.toFixed(digit[reportType])}${unit[reportType]}`;
 
 	let state: string = '';
 
