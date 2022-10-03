@@ -52,7 +52,8 @@ export default function renderGraph(
 	let graphChart: string[] = [];
 	reportData.map((dayReport, i) => {
 		const barHeight = (dayReport / largest) * 9.3;
-		const valueHtml = ['<div id="graph_value">', `${dayReport}`, '</div>'];
+		const value = dayReport === 0 || isNaN(dayReport) ? 'X' : dayReport;
+		const valueHtml = ['<div id="graph_value">', `${value}`, '</div>'];
 		const barHtml = [`<div id="graph_bar" style="height:${barHeight}rem"></div>`];
 		const xHtml = [`<div id="graph_x">${i + 1}일차</div>`];
 		graphChart.push(['<div>', ...valueHtml, ...barHtml, ...xHtml, '</div>'].join(''));
