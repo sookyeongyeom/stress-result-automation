@@ -13,11 +13,13 @@ export default class ValidExcelData {
 	exercise5: number = 0;
 	exercise6: number = 0;
 	exercise7: number = 0;
+	sleep1: number = 0;
 	sleep2: number = 0;
 	sleep3: number = 0;
 	sleep4: number = 0;
 	sleep5: number = 0;
 	sleep6: number = 0;
+	sleep7: number = 0;
 	walk1: number = 0;
 	walk2: number = 0;
 	walk3: number = 0;
