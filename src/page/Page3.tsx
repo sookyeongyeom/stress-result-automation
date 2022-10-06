@@ -32,11 +32,11 @@ function Page3({ parsedData, pressReady }: Page3PropsType) {
 			}
 
 			// prettier-ignore
-			renderGuage(exerciseData as number[], exerciseAverage, exerciseGauge, exerciseState, 'exercise', false);
+			renderGuage(exerciseData as number[], exerciseAverage, exerciseGauge, exerciseState, 'exercise');
 			// prettier-ignore
-			renderGuage(sleepData as number[], sleepAverage, sleepGauge, sleepState, 'sleep', true);
+			renderGuage(sleepData as number[], sleepAverage, sleepGauge, sleepState, 'sleep');
 			// prettier-ignore
-			renderGuage(walkData as number[], walkAverage, walkGauge, walkState, 'walk', false, gender as string);
+			renderGuage(walkData as number[], walkAverage, walkGauge, walkState, 'walk', gender as string);
 			console.log('page3 완료');
 			pressReady();
 		}

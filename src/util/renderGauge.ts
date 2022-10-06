@@ -18,13 +18,12 @@ export default function renderGuage(
 	targetGauge: MutableRefObject<HTMLImageElement>,
 	targetState: MutableRefObject<HTMLTableCellElement>,
 	reportType: string,
-	isSleepReport: boolean,
 	gender?: string,
 ) {
 	// 모든 데이터를 숫자로 변환
 	reportData = reportData.map((v) => Number(v));
 	let total = reportData.reduce((acc, cur) => (acc += cur), 0);
-	if (isSleepReport) total /= 60;
+	if (reportType === 'sleep') total /= 60;
 	const average = total / reportData.length;
 
 	// 7일 평균 렌더링
