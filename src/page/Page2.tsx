@@ -27,9 +27,9 @@ export default function Page2({ parsedData }: PagePropsType) {
 				if (key.slice(0, 4) === 'walk') walkData.push(parsedData[key]);
 			}
 
-			renderGraph(exerciseData as number[], exerciseY, exerciseGraph, false);
-			renderGraph(sleepData as number[], sleepY, sleepGraph, false);
-			renderGraph(walkData as number[], walkY, walkGraph, true);
+			renderGraph(exerciseData as number[], exerciseY, exerciseGraph, 'exercise');
+			renderGraph(sleepData as number[], sleepY, sleepGraph, 'sleep');
+			renderGraph(walkData as number[], walkY, walkGraph, 'walk');
 			console.log('page2 완료');
 		}
 	}, [parsedData]);
