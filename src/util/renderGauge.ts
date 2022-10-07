@@ -21,7 +21,7 @@ export default function renderGuage(
 	gender?: string,
 ) {
 	// 모든 데이터를 숫자로 변환
-	reportData = reportData.map((v) => Number(v));
+	reportData = reportData.map((v) => Math.max(Number(v), 0));
 	let total = reportData.reduce((acc, cur) => (acc += cur), 0);
 	if (reportType === 'sleep') total /= 60;
 	const average = total / reportData.length;
