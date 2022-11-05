@@ -54,7 +54,7 @@ export default function renderGuage(
 
 	// 게이지 렌더링
 	const max: Standard = {
-		exercise: 120,
+		exercise: 2,
 		sleep: 18,
 		walk: {
 			남: 24000,
