@@ -139,7 +139,7 @@ function Page3({ parsedData, pressReady }: Page3PropsType) {
 								<p>
 									WHO 권장
 									<br />
-									중·고강도 신체활동시간:
+									중·고강도 신체활동<span style={{ color: 'rgb(244, 64, 64)' }}>*</span>시간:
 									<br />
 									1일 평균 60분
 								</p>
@@ -175,11 +175,20 @@ function Page3({ parsedData, pressReady }: Page3PropsType) {
 						</tr>
 					</tbody>
 				</table>
+				<div className='comment'>
+					<span style={{ color: 'rgb(244, 64, 64)' }}>*</span>{' '}
+					<span className='bold500'>중강도 신체활동</span> : 심장박동이 조금 빨라지거나 평소보다
+					숨이 조금 더 차게 만드는 활동 (예: 빨리 걷기, 자전거타기, 배드민턴 등)
+					<br />
+					<span style={{ color: 'rgb(244, 64, 64)' }}>*</span>{' '}
+					<span className='bold500'>고강도 신체활동</span> : 심장박동이 많이 빨라지거나 평소보다
+					숨이 훨씬 더 차게 만드는 활동 (예: 달리기, 축구, 농구, 줄넘기 등)
+				</div>
 				<div className='report_caution'>
 					※
 					<span
 						className='underline bold500'
-						style={{ display: 'inline-block', marginBottom: '0.3rem' }}>
+						style={{ display: 'inline-block', marginBottom: '0.1rem' }}>
 						리포트 확인 시 주의사항
 					</span>
 					<div>
