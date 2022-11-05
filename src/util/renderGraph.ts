@@ -1,4 +1,5 @@
 import { MutableRefObject } from 'react';
+import formatHours from './formatHours';
 
 export default function renderGraph(
 	reportData: number[],
@@ -57,8 +58,8 @@ export default function renderGraph(
 	reportData.map((dayReport, i) => {
 		const barHeight = (Math.max(dayReport, 0) / largest) * 9.3;
 		let value;
-		if (reportType === 'exercise') value = dayReport === -1 ? 'X' : dayReport;
-		if (reportType === 'sleep') value = dayReport === 0 ? 'X' : dayReport;
+		if (reportType === 'exercise') value = dayReport === -1 ? 'X' : formatHours(dayReport);
+		if (reportType === 'sleep') value = dayReport === 0 ? 'X' : formatHours(dayReport);
 		if (reportType === 'walk') value = dayReport === 0 ? 'X' : dayReport;
 		const valueHtml = ['<div id="graph_value">', `${value}`, '</div>'];
 		const barHtml = [`<div id="graph_bar" style="height:${barHeight}rem"></div>`];
