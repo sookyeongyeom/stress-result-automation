@@ -1,4 +1,5 @@
 import { MutableRefObject } from 'react';
+import formatHours from './formatHours';
 
 type Unit = {
 	[key: string]: string;
@@ -23,21 +24,13 @@ export default function renderGuage(
 	// 모든 데이터를 숫자로 변환
 	reportData = reportData.map((v) => Math.max(Number(v), 0));
 	let total = reportData.reduce((acc, cur) => (acc += cur), 0);
-	if (reportType === 'sleep') total /= 60;
+	if (reportType === 'sleep' || reportType === 'exercise') total /= 60;
 	const average = total / reportData.length;
 
 	// 7일 평균 렌더링
-	const unit: Unit = {
-		exercise: '분',
-		sleep: '시간',
-		walk: '걸음',
-	};
-	const digit: Digit = {
-		exercise: 0,
-		sleep: 1,
-		walk: 0,
-	};
-	targetAverage.current.innerHTML = `${average.toFixed(digit[reportType])}${unit[reportType]}`;
+	if (reportType === 'sleep' || reportType === 'exercise')
+		targetAverage.current.innerHTML = `${formatHours(Number(average.toFixed(2)))}`;
+	else targetAverage.current.innerHTML = `${average.toFixed(0)}걸음`;
 
 	let state: string = '';
 
