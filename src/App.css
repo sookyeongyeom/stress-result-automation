@@ -180,9 +180,9 @@ body {
 }
 .graph_caption {
 	background-color: rgb(212, 223, 252);
-	padding: 3.1mm 10mm;
+	padding: 3.1mm 7mm;
 	line-height: 6mm;
-	font-size: 10pt;
+	font-size: 9.5pt;
 	color: rgb(63, 63, 63);
 	letter-spacing: 0.05rem;
 }
@@ -192,7 +192,6 @@ body {
 	border-left: 0;
 	border-right: 0;
 	width: 100%;
-	margin-bottom: 3mm;
 	font-size: 11pt;
 }
 .page2 th,

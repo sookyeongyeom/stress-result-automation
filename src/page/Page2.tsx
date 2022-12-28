@@ -3,6 +3,7 @@ import GrayBottom from '../asset/page2_회색하단.png';
 import renderGraph from '../util/renderGraph';
 import { useEffect, useRef } from 'react';
 import PagePropsType from '../model/PagePropsType';
+import styled from 'styled-components';
 
 export default function Page2({ parsedData }: PagePropsType) {
 	const { name, gender, startDate, endDate } = parsedData;
@@ -55,15 +56,16 @@ export default function Page2({ parsedData }: PagePropsType) {
 						</tr>
 					</tbody>
 				</table>
+				<Guide>
+					※ 0은 해당 수준의 활동이 0분, X는 스마트워치 미착용 등으로 데이터가 없음을 의미합니다.
+				</Guide>
 				{/* <!-- **************** 신체활동시간 리포트 **************** --> */}
 				<div className='graph_caption'>
-					• <span className='underline bold500'>중·고강도 신체활동 시간이란,</span> 하루 중 밤
-					시간의 수면시간을 제외한 '상당히 활동적인 시간'과
-					<br />
-					&ensp;'매우 활동적인 시간'을 모두 합한 시간입니다.
+					• <span className='underline bold500'>중·고강도 신체활동 시간이란,</span> 하루 중
+					수면시간을 제외한 '상당히 활동적인 시간'과 '매우 활동적인 시간'의 합입니다.
 				</div>
 				<div id='graph' className='graph_exercise'>
-					<div id='graph_header'>일일 중·고강도 신체활동시간 리포트</div>
+					<div id='graph_header'>일일 중·고강도 신체활동시간</div>
 					<div id='graph_main'>
 						<div id='graph_y' ref={exerciseY}>
 							<div>5</div>
@@ -77,7 +79,7 @@ export default function Page2({ parsedData }: PagePropsType) {
 					수면시간'(얕은수면+깊은수면+렘수면)입니다.
 				</div>
 				<div id='graph' className='graph_sleep'>
-					<div id='graph_header'>일일 수면시간 리포트</div>
+					<div id='graph_header'>일일 수면시간</div>
 					<div id='graph_main'>
 						<div id='graph_y' ref={sleepY}>
 							<div>5</div>
@@ -87,11 +89,11 @@ export default function Page2({ parsedData }: PagePropsType) {
 				</div>
 				{/* <!-- **************** 걸음수 리포트 **************** --> */}
 				<div className='graph_caption'>
-					• <span className='underline bold500'>걸음 수</span>는 하루 동안의 총 걸음 수(Step)를
+					• <span className='underline bold500'>걸음 수</span>는 하루 동안의 총 걸음 수를
 					의미합니다.
 				</div>
 				<div id='graph' className='graph_walk'>
-					<div id='graph_header'>일일 걸음 수 리포트</div>
+					<div id='graph_header'>일일 걸음 수</div>
 					<div id='graph_main'>
 						<div id='graph_y' ref={walkY}>
 							<div>5</div>
@@ -103,3 +105,8 @@ export default function Page2({ parsedData }: PagePropsType) {
 		</div>
 	);
 }
+
+const Guide = styled.p`
+	font-size: 10.3pt;
+	margin: 2.5mm 0;
+`;

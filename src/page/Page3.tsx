@@ -239,7 +239,8 @@ const Small = styled.span`
 
 const Guide = styled.p`
 	font-size: 10.3pt;
-	margin: 1.5mm 0;
+	margin: 2mm 0;
+	margin-bottom: 2.5mm;
 `;
 
 export default Page3;
