@@ -1,14 +1,6 @@
 import { MutableRefObject } from 'react';
 import formatHours from './formatHours';
 
-type Unit = {
-	[key: string]: string;
-};
-
-type Digit = {
-	[key: string]: number;
-};
-
 type Standard = {
 	[key: string]: any;
 };
@@ -31,25 +23,24 @@ export default function renderGuage(
 	if (reportType === 'sleep') numerator = reportData.filter((v) => v !== 0).length;
 	if (reportType === 'walk') numerator = reportData.filter((v) => v !== 0).length;
 
+	if (!numerator) {
+		targetAverage.current.innerHTML = '-';
+		targetGauge.current.style.display = 'none';
+		targetState.current.innerHTML = '-';
+		return;
+	} else targetGauge.current.style.display = 'block';
+
 	// 평균
 	reportData = reportData.map((v) => Math.max(Number(v), 0));
 	let total = reportData.reduce((acc, cur) => (acc += cur), 0);
 	if (reportType === 'sleep' || reportType === 'exercise') total /= 60;
 	let average = total / numerator;
-	console.log(average);
-
-	console.log('기존 : ' + total / 7);
-	console.log('필터 : ' + average);
 
 	// 7일 평균 렌더링
-	if (isNaN(average)) targetAverage.current.innerHTML = 'X';
-	else {
-		if (reportType === 'sleep' || reportType === 'exercise')
-			targetAverage.current.innerHTML = `${formatHours(Number(average.toFixed(2)))}`;
-		else
-			targetAverage.current.innerHTML = `${Number(average.toFixed(0)).toLocaleString('ko-KR')}걸음`;
-	}
-	if (isNaN(average)) average = 0;
+	if (reportType === 'sleep' || reportType === 'exercise')
+		targetAverage.current.innerHTML = `${formatHours(Number(average.toFixed(2)))}`;
+	else
+		targetAverage.current.innerHTML = `${Number(average.toFixed(0)).toLocaleString('ko-KR')}걸음`;
 
 	let state: string = '';
 
