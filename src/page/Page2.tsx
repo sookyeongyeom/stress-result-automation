@@ -4,6 +4,7 @@ import renderGraph from '../util/renderGraph';
 import { useEffect, useRef } from 'react';
 import PagePropsType from '../model/PagePropsType';
 import styled from 'styled-components';
+import subtractOneDay from '../util/subtractOneDay';
 
 export default function Page2({ parsedData }: PagePropsType) {
 	const { name, gender, startDate, endDate } = parsedData;
@@ -52,7 +53,7 @@ export default function Page2({ parsedData }: PagePropsType) {
 							<th>성별</th>
 							<td id='profile_gender'>{gender}</td>
 							<th>실시기간</th>
-							<td id='profile_date'>{`${startDate} ~ ${endDate}`}</td>
+							<td id='profile_date'>{`${startDate} ~ ${subtractOneDay(endDate)}`}</td>
 						</tr>
 					</tbody>
 				</table>

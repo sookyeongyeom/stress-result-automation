@@ -41,17 +41,24 @@ export default function renderGraph(
 			});
 	}
 	// 그래프 축약
-	if (graphY.length > 10) {
-		const shorten = [
-			...graphY.slice(0, 1),
-			'<div>≈</div>',
-			`<div>${largest / 2}</div>`,
-			'<div>≈</div>',
-			...graphY.slice(-1),
-		];
-		graphY = [...shorten];
-	}
-	targetY.current.innerHTML = graphY.reverse().join('');
+	// if (graphY.length > 10) {
+	// 	const shorten = [
+	// 		...graphY.slice(0, 1),
+	// 		'<div>≈</div>',
+	// 		`<div>${largest / 2}</div>`,
+	// 		'<div>≈</div>',
+	// 		...graphY.slice(-1),
+	// 	];
+	// 	graphY = [...shorten];
+	// }
+	const shorten = [
+		...graphY.slice(0, 1),
+		'<div> </div>',
+		`<div>${largest / 2}</div>`,
+		'<div> </div>',
+		...graphY.slice(-1),
+	];
+	targetY.current.innerHTML = shorten.reverse().join('');
 
 	// graph_chart innerHTML 생성
 	let graphChart: string[] = [];
