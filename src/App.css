@@ -98,7 +98,7 @@ body {
 	padding-bottom: 2rem;
 }
 .page2_navy_bg {
-	width: 101%;
+	width: 110%;
 	top: -1mm;
 }
 .page2_gray_bg {
@@ -239,16 +239,17 @@ body {
 	transform: translate(-50%, -50%);
 }
 .chart_bar {
-	width: inherit;
-	height: inherit;
+	width: 100%;
+	height: 100%;
 	border-radius: 50%;
 	background: conic-gradient(
-		#9acc86 35deg,
+		#9acc86 0deg,
 		#9acc86 180deg,
 		#f48379 180deg,
 		#f48379 360deg,
 		#9acc86 360deg
 	);
+	background-repeat: no-repeat;
 }
 .chart_hidden {
 	width: inherit;
@@ -408,6 +409,8 @@ body {
 		height: 297mm;
 	}
 	.page_container {
+		transform: scale(110%);
+		transform-origin: left top;
 		margin: 0;
 		box-shadow: none;
 		/* 프린트 시 페이지 분리 */
