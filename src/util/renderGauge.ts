@@ -22,20 +22,38 @@ export default function renderGuage(
 	gender?: string,
 ) {
 	// 모든 데이터를 숫자로 변환
+	console.log('####### ' + reportType + ' #######');
+	console.log(reportData);
+
+	// 분자
+	let numerator = 0;
+	if (reportType === 'exercise') numerator = reportData.filter((v) => v !== -1).length;
+	if (reportType === 'sleep') numerator = reportData.filter((v) => v !== 0).length;
+	if (reportType === 'walk') numerator = reportData.filter((v) => v !== 0).length;
+
+	// 평균
 	reportData = reportData.map((v) => Math.max(Number(v), 0));
 	let total = reportData.reduce((acc, cur) => (acc += cur), 0);
 	if (reportType === 'sleep' || reportType === 'exercise') total /= 60;
-	const average = total / reportData.length;
+	let average = total / numerator;
+	console.log(average);
+
+	console.log('기존 : ' + total / 7);
+	console.log('필터 : ' + average);
 
 	// 7일 평균 렌더링
-	if (reportType === 'sleep' || reportType === 'exercise')
-		targetAverage.current.innerHTML = `${formatHours(Number(average.toFixed(2)))}`;
-	else targetAverage.current.innerHTML = `${average.toFixed(0)}걸음`;
+	if (isNaN(average)) targetAverage.current.innerHTML = 'X';
+	else {
+		if (reportType === 'sleep' || reportType === 'exercise')
+			targetAverage.current.innerHTML = `${formatHours(Number(average.toFixed(2)))}`;
+		else targetAverage.current.innerHTML = `${average.toFixed(0)}걸음`;
+	}
+	if (isNaN(average)) average = 0;
 
 	let state: string = '';
 
 	if (reportType === 'exercise') {
-		if (average >= 60) state = 'exact';
+		if (average >= 1) state = 'exact';
 		else state = 'less';
 	}
 	if (reportType === 'sleep') {
