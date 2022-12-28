@@ -4,6 +4,7 @@ import Pin from '../asset/page3_pin.svg';
 import { useEffect, useRef } from 'react';
 import renderGuage from '../util/renderGauge';
 import { Page3PropsType } from '../model/PagePropsType';
+import styled from 'styled-components';
 
 function Page3({ parsedData, pressReady }: Page3PropsType) {
 	const { gender } = parsedData;
@@ -52,11 +53,15 @@ function Page3({ parsedData, pressReady }: Page3PropsType) {
 			</div>
 			{/* <!-- **************** 내용 **************** --> */}
 			<div id='content' className='page3_content'>
-				<h2>7일 종합 리포트</h2>
+				<h2>종합 리포트</h2>
+				<Guide>
+					※ 스마트워치 미착용 등으로 데이터가 존재하지 않는 일자를 제외한 '실 참여일' 기준으로 평균
+					수치와 충족 여부가 제공됩니다.
+				</Guide>
 				<table>
 					<tbody>
 						<tr>
-							<th>7일 평균</th>
+							<th>참여일 평균</th>
 							<td id='chart_exercise'>
 								<div className='chart'>
 									<div className='chart_bar'></div>
@@ -103,7 +108,7 @@ function Page3({ parsedData, pressReady }: Page3PropsType) {
 						</tr>
 						<tr>
 							<th>
-								7일
+								참여일
 								<br />
 								평균
 							</th>
@@ -137,25 +142,35 @@ function Page3({ parsedData, pressReady }: Page3PropsType) {
 							<th>기준</th>
 							<td>
 								<p>
-									WHO 권장
+									세계보건기구 권장
 									<br />
 									중·고강도 신체활동<span style={{ color: 'rgb(244, 64, 64)' }}>*</span>시간:
 									<br />
-									1일 평균 60분
+									<BoldNavy>1일 60분</BoldNavy>
 								</p>
 								<p>
-									2020 WHO
-									<br />
-									(Guidelines on physical activity)
+									<Small>
+										2020 세계보건기구(WHO)
+										<br />
+										Guidelines on physical activity
+									</Small>
 								</p>
 							</td>
 							<td>
 								<p>
 									미국 국립수면재단 권장 취학아동 (6-13세)
 									<br />
-									적정 수면시간: 9-11시간
+									적정 수면시간:
+									<br />
+									<BoldNavy>1일 9-11시간</BoldNavy>
 								</p>
-								<p>미국 국립수면재단 (National Sleep Foundation)</p>
+								<p>
+									<Small>
+										미국 국립수면재단
+										<br />
+										(National Sleep Foundation)
+									</Small>
+								</p>
 							</td>
 							<td>
 								<p>
@@ -164,25 +179,31 @@ function Page3({ parsedData, pressReady }: Page3PropsType) {
 									바이오메디컬
 									<br />
 									리서치센터 제시
-									<br />만 6-11세 걸음 기준:
+									<br />만 6-11세 적정 걸음 수:
 									<br />
-									남아 12,000걸음,
-									<br />
-									여아 10,000걸음
+									<BoldNavy>
+										1일 남아 12,000걸음
+										<br />
+										1일 여아 10,000걸음
+									</BoldNavy>
 								</p>
-								<p>Pennington Biomedical Research Center - Walking Behavior Laboratory</p>
+								<p>
+									<Small>Pennington Biomedical Research Center - Walking Behavior Laboratory</Small>
+								</p>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 				<div className='comment'>
 					<span style={{ color: 'rgb(244, 64, 64)' }}>*</span>{' '}
-					<span className='bold500'>중강도 신체활동</span> : 심장박동이 조금 빨라지거나 평소보다
-					숨이 조금 더 차게 만드는 활동 (예: 빨리 걷기, 자전거타기, 배드민턴 등)
+					<span className='bold500'>중강도 신체활동</span> : 10분 정도 운동 지속 시 땀이 나며 호흡이
+					짧아지는 수준, 대화는 할 수 있지만 노래는 부를 수 없을 정도의 신체활동 (예: 빨리 걷기,
+					자전거타기)
 					<br />
 					<span style={{ color: 'rgb(244, 64, 64)' }}>*</span>{' '}
-					<span className='bold500'>고강도 신체활동</span> : 심장박동이 많이 빨라지거나 평소보다
-					숨이 훨씬 더 차게 만드는 활동 (예: 달리기, 축구, 농구, 줄넘기 등)
+					<span className='bold500'>고강도 신체활동</span> : 짧은 시간 운동을 해도 호흡이 깊고
+					빨라지며 땀이 나는 수준, 대화를 나누기 힘든 정도의 신체활동 (예: 달리기, 축구, 농구,
+					줄넘기 등)
 				</div>
 				<div className='report_caution'>
 					※
@@ -192,16 +213,33 @@ function Page3({ parsedData, pressReady }: Page3PropsType) {
 						리포트 확인 시 주의사항
 					</span>
 					<div>
-						본 연구를 통해 제공되는 결과값은 Fitbit 기기를 통하여 수집된 데이터를 기반으로 제공되며
-						Fitbit 서비스를 통하여 수집, 제시된 데이터의 정확도는 의료장치 또는 과학 측정 장치
-						수준의 정확도와 일치하도록 의도된 것은 아닙니다. 본 리포트에 제시된 결과는 의료목적의
-						진단 기준으로 활용될 수 없으며 보다 정확한 진단과 상담을 원하시면 관련 전문기관을
-						방문하여 상담 받으시는 것을 추천 드립니다.
+						본 연구를 통해 제공되는 결과값은 Fitbit 기기를 통하여 수집된 데이터를 기반으로
+						제공됩니다.{' '}
+						<BoldNavy>
+							Fitbit 서비스를 통하여 수집, 제시된 데이터의 정확도는 의료장치 또는 과학 측정 장치
+							수준의 정확도와 항상 일치하지 않을 수 있습니다.
+						</BoldNavy>{' '}
+						본 리포트에 제시된 결과는 의료목적의 진단 기준으로 활용될 수 없으며 보다 정확한 진단과
+						상담을 원하시면 관련 전문 기관을 방문하여 상담 받으시는 것을 추천 드립니다.
 					</div>
 				</div>
 			</div>
 		</div>
 	);
 }
+
+const BoldNavy = styled.span`
+	font-weight: 600;
+	color: #2f488a;
+`;
+
+const Small = styled.span`
+	font-size: 9pt;
+`;
+
+const Guide = styled.p`
+	font-size: 10.3pt;
+	margin: 1.5mm 0;
+`;
 
 export default Page3;
