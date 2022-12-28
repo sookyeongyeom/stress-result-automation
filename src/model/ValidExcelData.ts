@@ -4,8 +4,8 @@ export default class ValidExcelData {
 	name: string = '';
 	gender: string = '';
 	school: string = '';
-	startDate: Date = new Date();
-	endDate: Date = new Date();
+	startDate: string = '';
+	endDate: string = '';
 	exercise1: number = 0;
 	exercise2: number = 0;
 	exercise3: number = 0;

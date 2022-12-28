@@ -5,6 +5,7 @@ import Logo from '../asset/page1_로고.png';
 import GrayBG from '../asset/page1_회색배경.png';
 import Border from '../asset/page1_border.png';
 import PagePropsType from '../model/PagePropsType';
+import subtractOneDay from '../util/subtractOneDay';
 
 export default function Page1({ parsedData }: PagePropsType) {
 	const { name, gender, school, startDate, endDate } = parsedData;
@@ -44,7 +45,7 @@ export default function Page1({ parsedData }: PagePropsType) {
 						</tr>
 						<tr>
 							<th style={{ letterSpacing: '0.03rem', paddingLeft: '0.2rem' }}>실시기간</th>
-							<td id='profile_date'>{`${startDate} ~ ${endDate}`}</td>
+							<td id='profile_date'>{`${startDate} ~ ${subtractOneDay(endDate)}`}</td>
 						</tr>
 					</tbody>
 				</table>
