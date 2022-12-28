@@ -24,7 +24,7 @@ export default function Page1({ parsedData }: PagePropsType) {
 				<div className='page1_header'>
 					<img src={Border} alt='border' />
 					<h1>
-						2022 ADDS Yonsei
+						ADDS Yonsei
 						<br />
 						<span style={{ letterSpacing: '0.2rem' }}>스마트워치 리포트</span>
 					</h1>
