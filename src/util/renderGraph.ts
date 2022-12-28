@@ -60,7 +60,7 @@ export default function renderGraph(
 		let value;
 		if (reportType === 'exercise') value = dayReport === -1 ? 'X' : formatHours(dayReport);
 		if (reportType === 'sleep') value = dayReport === 0 ? 'X' : formatHours(dayReport);
-		if (reportType === 'walk') value = dayReport === 0 ? 'X' : dayReport;
+		if (reportType === 'walk') value = dayReport === 0 ? 'X' : dayReport.toLocaleString('ko-KR');
 		const valueHtml = ['<div id="graph_value">', `${value}`, '</div>'];
 		const barHtml = [`<div id="graph_bar" style="height:${barHeight}rem"></div>`];
 		const xHtml = [`<div id="graph_x">${i + 1}일차</div>`];

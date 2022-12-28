@@ -46,7 +46,8 @@ export default function renderGuage(
 	else {
 		if (reportType === 'sleep' || reportType === 'exercise')
 			targetAverage.current.innerHTML = `${formatHours(Number(average.toFixed(2)))}`;
-		else targetAverage.current.innerHTML = `${average.toFixed(0)}걸음`;
+		else
+			targetAverage.current.innerHTML = `${Number(average.toFixed(0)).toLocaleString('ko-KR')}걸음`;
 	}
 	if (isNaN(average)) average = 0;
 
